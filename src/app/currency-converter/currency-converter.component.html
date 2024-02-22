@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Converter</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+   
+   <div class="title">
+    <h1>Exchange.Rate</h1>
+   </div>
+  <div class="container-wrapper">
+    
+    <div class="card-title">
+      <p> Exchange rate EUR / USD: {{exchangeRate.toFixed(4)}}</p>
+    </div>
+
+    <div class="switch-block">
+      <label for="amountEuro">EUR</label>
+      <input type="number" id="amountEuro" [(ngModel)]="amountEuro" >
+
+      <label for="amountUSD">USD</label>
+      <input type="number" id="amountUSD" [(ngModel)]="amountUSD">
+
+      <button (click)="convert()">Go</button>
+
+
+
+      <label for="toggleSwitch">switch to convert to {{ isEuroSelected ? 'EUR' : 'USD' }}</label>
+      <input type="checkbox" id="toggleSwitch" [(ngModel)]="isEuroSelected" (change)="toggleConversion()">
+    </div>
+
+    <div class="fixed-exchange-rate">
+      <label for="fixedExchangeRate"> Fixed exchange rate</label>
+      <input type="number" id="fixedExchangeRate" [(ngModel)]="fixedExchangeRate" >
+      <p *ngIf="displayMessage">The fixed exchange rate has been disabled due to a variation of more than 2% with the real rate.</p>
+    </div>
+    
+    <div class="conversionHistory">
+      <h2>Conversion History</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Real Rate</th>
+            <th>Selected Rate</th>
+            <th>Initial Value</th>
+            <th>Original Currency</th>
+            <th>Converted Value</th>
+            <th>Converted Currency</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of conversionHistory">
+            <td>{{ entry.realRate.toFixed(4) }}</td>
+            <td>{{ entry.selectedRate.toFixed(4)}}</td>
+            <td>{{ entry.initialValue.toFixed(4) }}</td>
+            <td>{{ entry.originalCurrency }}</td>
+            <td>{{ entry.convertedValue.toFixed(4) }}</td>
+            <td>{{ entry.convertedCurrency }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    
+    
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
